@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Sign Up</title>
+{% endblock %}
+
+{% load account socialaccount %}
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'auths/css/signup.css' %}">
+</head>
+
+
+{% block content %}
+<body>
+    <h1>customize</h1>
+    <h1 style="color: brown; display:flex; justify-content: center;">Signup Page</h1>
+    <div style="display: flex; justify-content: center;">
+        <h3 class="hmm">Sign up with social accounts</h3>
+    </div>
+    <div>
+        <div style="display: flex; justify-content: center; margin-bottom: -25px">
+            <a style="text-decoration: none; color: #f65" href="{% provider_login_url 'google' %}"><h4>Sign up with Google</h4></a>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <a style="text-decoration: none; color: #65f" href="{% provider_login_url 'facebook' %}"><h4>Sign up with Facebook</h4></a>
+        </div>
+        
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Default signup form -->
+    
+    <div>
+        <div style="display:flex; justify-content: center;">
+            <h3>Fill your details to Sign up</h3>
+        </div>
+        <div style="display:flex; justify-content: center;">
+            <form method="POST" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info">signup</button>
+            </form>
+        </div>
+        
+    </div>
+    
+</body>
+{% endblock %}

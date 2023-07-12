@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block content %}
+<body>
+    <div style="display: grid; place-items: center;">
+        {% if user.is_authenticated %} 
+        <h2>Hello {{ user }}!</h2>
+        <h4>Welcome to my social-auth application</h4>
+        {% else %}
+        <h4>Welcome to my social-auth application</h4>
+        {% endif %}
+    </div>
+</body>
+
+{% endblock %}
+</html>

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+<head>
+    <script id="facebook-jssdk" async="" src="//connect.facebook.net/en_US/sdk.js"></script>
+</head>
+
+{% block title %}
+  <title>Sign In</title>
+{% endblock %}
+
+{% block content %}
+
+<body>
+    
+  <h1 style="color: brown; display:flex; justify-content: center;">Login Page</h1>
+
+<div style="display: flex; justify-content: center">
+    <p>
+        Please sign in with one
+        of your existing third party accounts. Or, <a href="/accounts/signup/">sign up</a>
+        for a example.com account and sign in below:
+    </p>
+</div>
+  
+    <div style="display: flex; justify-content: center;">
+        <h3 class="hmm">Sign in with social accounts</h3>
+    </div>
+    
+    <div>
+        <div style="display: flex; justify-content: center; margin-bottom: -25px">
+          <button style="background-color: crimson; border: 1px solid #fff"><a style="text-decoration: none; color: #fff" title="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login">Google</a></button>
+        </div><br><br>
+        <div style="display: flex; justify-content: center;">
+            <button style="background-color: blue; border: 1px solid #fff"><a style="text-decoration: none; color: #fff" title="Facebook" class="socialaccount_provider facebook" href="/accounts/facebook/login/?process=login">Facebook</a></button>
+        </div>
+        
+    </div>
+    
+    <div>
+      <div style="display: flex; justify-content: center; margin-bottom: -25px">
+        <button style="background-color: crimson; border: 1px solid #fff"><a style="text-decoration: none; color: #fff" title="Google" class="socialaccount_provider google" href="{% url 'google_login' %}">Google</a></button>
+      </div><br><br>
+      <div style="display: flex; justify-content: center;">
+          <button style="background-color: blue; border: 1px solid #fff"><a style="text-decoration: none; color: #fff" title="Facebook" class="socialaccount_provider facebook" href="{% url 'facebook_login' %}">Facebook</a></button>
+      </div>
+      
+    </div>
+
+  <div class="login-or" style="display: flex; justify-content: center">or</div>
+
+</div>
+
+<div id="fb-root"></div>
+<script id="allauth-facebook-settings" type="application/json">
+{"appId": "YOUR GOOGLE CLIENT ID", "version": "v13.0", "sdkUrl": "//connect.facebook.net/en_US/sdk.js", "initParams": {"appId": "YOUR GOOGLE CLIENT ID", "version": "v13.0"}, "loginOptions": {"scope": ""}, "loginByTokenUrl": "http://127.0.0.1:8000/accounts/facebook/login/token/", "cancelUrl": "http://127.0.0.1:8000/accounts/social/login/cancelled/", "logoutUrl": "http://127.0.0.1:8000/accounts/logout/", "loginUrl": "http://127.0.0.1:8000/accounts/facebook/login/", "errorUrl": "http://127.0.0.1:8000/accounts/social/login/error/", "csrfToken": "K49hw4aKrWcKiXqelIG9wBvne182EP1vPZ3E0gfFyFeWTfcV3Tx35Q6UqTxcKTWL"}
+</script>
+<script type="text/javascript" src="/static/facebook/js/fbconnect.js"></script>
+
+<div style="display: flex; justify-content: center">
+    <form class="login" method="POST" action="/accounts/login/">
+        {% csrf_token %}
+        <p>
+          <label for="id_login">Username:</label>
+          <input type="text" name="login" placeholder="Username" autocomplete="username" maxlength="150" required="" id="id_login">
+        </p>
+      
+        <p>
+          <label for="id_password">Password:</label>
+          <input type="password" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password">
+        </p>
+      
+        <p>
+          <label for="id_remember">Remember Me:</label>
+          <input type="checkbox" name="remember" id="id_remember">
+        </p>
+        
+        <a class="button secondaryAction" href="/accounts/password/reset/">Forgot Password?</a><br><br>
+        <button class="btn btn-info" type="submit">Sign In</button>
+      </form>      
+</div>
+
+</body>
+
+{% endblock %}
